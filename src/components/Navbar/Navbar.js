@@ -8,8 +8,6 @@ import UInotification from "../../assets/ui-icons/notification.svg";
 import UIprofilePhoto from "../../assets/ui-icons/profile-photo.jpg";
 import { AiOutlinePlus } from "react-icons/ai";
 
-const modalElement = document.querySelector("#modal");
-
 const Navbar = () => {
   const [modal, setModal] = useState(false);
 
