@@ -80,15 +80,6 @@ body {
   animation: fade_in 0.5s ease-in-out forwards;
 }
 
-@keyframes fade_in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .homepage_movie > p {
   position: relative;
   display: block;
@@ -104,12 +95,6 @@ body {
     z-index: -1;
     animation: bg_fill_before 0.75s ease-in-out forwards;
     animation-delay: $animation-delay;
-  }
-}
-
-@keyframes bg_fill_before {
-  to {
-    width: 100%;
   }
 }
 
@@ -209,6 +194,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  animation: fade_in 0.5s ease-in-out forwards;
 }
 
 .popular_movies--content {
@@ -262,4 +248,58 @@ body {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 2;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fade_in 200ms ease-out forwards;
+}
+
+.modal--content {
+  display: grid;
+  margin: 15% auto;
+  padding: 20px;
+  width: 450px; /* Could be more or less, depending on screen size */
+  max-width: 80%;
+  background-color: $fill-color;
+  animation: fade_in_down 200ms ease-out forwards;
+}
+
+.modal--close {
+  cursor: pointer;
+  float: right;
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade_in_down {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes bg_fill_before {
+  to {
+    width: 100%;
+  }
 }

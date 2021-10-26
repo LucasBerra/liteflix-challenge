@@ -11,7 +11,6 @@ const imageUrlW500 = "https://image.tmdb.org/t/p/w500";
 const MovieList = () => {
   const { secondaryMovieData } = useContext(IndexContext);
   const [popularMovies] = useState(secondaryMovieData.results.slice(0, 4));
-  console.log(popularMovies);
 
   return (
     <div className="popular_movies">

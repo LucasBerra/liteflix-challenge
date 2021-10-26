@@ -1,4 +1,5 @@
 $highlight-color: #64eebc;
+$highlight-color-active: #36c28e;
 
 nav {
   grid-row: 1 / 2;
@@ -41,6 +42,12 @@ nav {
 
     &::before {
       height: 100%;
+    }
+  }
+
+  &:active {
+    &::before {
+      background-color: $highlight-color-active;
     }
   }
 }

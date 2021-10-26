@@ -13,13 +13,12 @@ const imageUrlOriginal = "https://image.tmdb.org/t/p/original";
 
 const App = () => {
   const { mainMovieData } = useContext(IndexContext);
-  const homepageMovieIndex = Math.floor(
-    Math.random() * mainMovieData.results.length
-  );
-
-  console.log(mainMovieData.results);
-  // const homepageMovie = mainMovieData.results[homepageMovieIndex]; // random index
   const homepageMovie = mainMovieData.results[6]; // specific index
+
+  // const homepageMovieIndex = Math.floor(
+  //   Math.random() * mainMovieData.results.length
+  // );
+  // const homepageMovie = mainMovieData.results[homepageMovieIndex]; // random index
 
   // SETEA LA IMÁGEN DE FONDO
   useEffect(() => {
@@ -30,7 +29,6 @@ const App = () => {
 
   return (
     <div className="homepage_container">
-      <UploadMovie />
       <Navbar />
 
       <div className="homepage_movie">
@@ -51,10 +49,6 @@ const App = () => {
       <MovieList />
     </div>
   );
-};
-
-const UploadMovie = () => {
-  return <div></div>;
 };
 
 export default App;

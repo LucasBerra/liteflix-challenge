@@ -60,6 +60,10 @@ nav {
   height: 100%;
 }
 
+.nav--add-movie:active::before {
+  background-color: #36c28e;
+}
+
 .nav-right {
   -ms-grid-column: 11;
   -ms-grid-column-span: 2;
