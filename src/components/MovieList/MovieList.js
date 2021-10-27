@@ -75,7 +75,7 @@ const PopularMovie = ({ title, backdrop_path, vote_average, release_date }) => {
 };
 
 //PELÍCULAS GUARDADAS
-const SavedMovie = ({ title, img, id }) => {
+const SavedMovie = ({ title, img }) => {
   const [hover, setHover] = useState(false);
   const containerRef = useRef(null);
 

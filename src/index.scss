@@ -55,8 +55,8 @@ body {
   padding: 2rem 5rem;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.4) 70%,
-    rgba(0, 0, 0, 1) 100%
+    rgba($color: #000, $alpha: 0.3) 70%,
+    rgba($color: #000, $alpha: 1) 100%
   );
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto 1fr 10%;
@@ -102,7 +102,7 @@ body {
   font-size: 120px;
   letter-spacing: 16px;
   line-height: 120px;
-  text-shadow: rgba(0, 0, 0, 1) 0 0 20px;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 0 16px;
   margin-bottom: 1.5rem;
   color: $highlight-color;
 }
@@ -360,7 +360,7 @@ a {
   }
 }
 
-.modal--submit {
+.modal--button {
   grid-column: 2 / 3;
   grid-row: 4 / 5;
   width: 248px;
@@ -373,6 +373,16 @@ a {
   font-family: "BebasNeue Regular";
   letter-spacing: 4px;
   cursor: pointer;
+}
+
+.modal--submitted {
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 @keyframes fade_in {

@@ -16,7 +16,7 @@ const App = () => {
   const { mainMovieData, userMovieData, setUserMovieData } =
     useContext(IndexContext);
 
-  const homepageMovie = mainMovieData.results[16]; // USO UNA PELÍCULA EN ESPECÍFICO
+  const homepageMovie = mainMovieData.results[8]; // USO UNA PELÍCULA EN ESPECÍFICO
 
   // const homepageMovieIndex = Math.floor(
   //   Math.random() * mainMovieData.results.length
