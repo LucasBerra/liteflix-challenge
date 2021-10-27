@@ -50,12 +50,17 @@ const Navbar = () => {
     <>
       {modal && (
         <div className="modal" id="modal">
-          <form className="modal--content" onSubmit={handleSubmit}>
+          <form
+            className="modal--content"
+            onSubmit={handleSubmit}
+            autocomplete="off"
+          >
             <h3 className="modal--title">Agregar película</h3>
             <VscChromeClose
               className="modal--close"
               onClick={() => {
                 setModal(false);
+                setUserImg(undefined);
                 setUserTitle("");
               }}
             />
