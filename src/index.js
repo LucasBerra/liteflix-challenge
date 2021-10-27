@@ -15,8 +15,26 @@ const Index = () => {
   const [mainMovieData, setMainMovieData] = useState(null);
   const [popularMovieData, setPopularMovieData] = useState(null);
   const [userMovieData, setUserMovieData] = useState([]);
+
+  // Avisará si se quiere guardar una película ya agregada
+  const [notification, setNotification] = useState("");
+
+  // Cambia cuando se termina el fetch de ambas API
   const [isLoading, setIsLoading] = useState(true);
 
+  // useEffect para guardar data del usuario
+  useEffect(() => {
+    const localData = localStorage.getItem("user-movies");
+    if (localData) {
+      setUserMovieData(JSON.parse(localData));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("user-movies", JSON.stringify(userMovieData));
+  });
+
+  // Fetchea las APIs
   useEffect(() => {
     fetch(homepageMovieUrl)
       .then((res) => res.json())
@@ -46,8 +64,11 @@ const Index = () => {
         popularMovieData,
         userMovieData,
         setUserMovieData,
+        notification,
+        setNotification,
       }}
     >
+      {/* La App se renderiza cuando la data de API esta lista */}
       {!isLoading && <App />}
     </IndexContext.Provider>
   );

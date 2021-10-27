@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { IndexContext } from "../../index.js";
 import "./Navbar.css";
 
-/***** UI IMPORTS *****/
+// ASSETS:
 import liteflixLogo from "../../assets/liteflix-logo.svg";
 import UImenu from "../../assets/ui-icons/menu.svg";
 import UInotification from "../../assets/ui-icons/notification.svg";
@@ -40,15 +40,32 @@ const Navbar = () => {
   );
 };
 
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+  });
+};
+
 const Modal = ({ setModal }) => {
-  const { userMovieData, setUserMovieData } = useContext(IndexContext);
+  const { userMovieData, setUserMovieData, setNotification } =
+    useContext(IndexContext);
   const [userImg, setUserImg] = useState(undefined);
   const [userTitle, setUserTitle] = useState("");
 
   const [movieSubmitted, setMovieSubmitted] = useState(false);
 
-  const onImgUpload = (e) => {
-    setUserImg(URL.createObjectURL(e.target.files[0]));
+  const onImgUpload = async (e) => {
+    // setUserImg(URL.createObjectURL(e.target.files[0]));
+    const base64URL = await convertToBase64(e.target.files[0]);
+    setUserImg(base64URL);
 
     const text = document.querySelector(".modal--input_img_text");
     text.textContent = e.target.files[0].name;
@@ -63,6 +80,11 @@ const Modal = ({ setModal }) => {
         { title: userTitle, img: userImg, id: Date.now() },
       ]);
       setMovieSubmitted(true);
+    } else {
+      setNotification("La película ya se agregó");
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
     }
 
     // localStorage.setItem("userMovieData", JSON.stringify(userMovieData));
@@ -131,7 +153,7 @@ const Modal = ({ setModal }) => {
             placeholder="Título"
             className="modal--input_text"
             value={userTitle}
-            onChange={(e) => setUserTitle(e.target.value)}
+            onChange={(e) => setUserTitle(e.target.value.toUpperCase())}
           />
 
           <button type="submit" className="modal--button" disabled>
