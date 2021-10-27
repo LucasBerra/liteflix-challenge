@@ -6,8 +6,8 @@
 
 .movie {
   position: relative;
-  height: 110px;
-  width: 180px;
+  height: 130px;
+  width: 200px;
   padding: 0.25rem;
   border-radius: 3px;
   display: grid;
@@ -98,7 +98,6 @@
 .movie--rating_hover {
   grid-column: 0 / 1;
   grid-row: 3 / 4;
-  font-size: 0.8rem;
   align-self: center;
   justify-self: flex-start;
   display: flex;
@@ -111,7 +110,6 @@
 .movie--year_hover {
   grid-column: 3 / 4;
   grid-row: 3 / 4;
-  font-size: 0.8rem;
   align-self: center;
   justify-self: flex-end;
   opacity: 0;

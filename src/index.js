@@ -13,7 +13,8 @@ export const IndexContext = createContext();
 
 const Index = () => {
   const [mainMovieData, setMainMovieData] = useState(null);
-  const [secondaryMovieData, setSecondaryMovieData] = useState(null);
+  const [popularMovieData, setPopularMovieData] = useState(null);
+  const [userMovieData, setUserMovieData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -27,19 +28,26 @@ const Index = () => {
     fetch(popularMoviesUrl)
       .then((res) => res.json())
       .then((parsedData) => {
-        setSecondaryMovieData(parsedData);
+        setPopularMovieData(parsedData);
       })
       .catch((err) => console.log(`Error de fetching: ${err}`));
   }, []);
 
   useEffect(() => {
-    if (mainMovieData && secondaryMovieData) {
+    if (mainMovieData && popularMovieData) {
       setIsLoading(false);
     }
-  }, [mainMovieData, secondaryMovieData]);
+  }, [mainMovieData, popularMovieData]);
 
   return (
-    <IndexContext.Provider value={{ mainMovieData, secondaryMovieData }}>
+    <IndexContext.Provider
+      value={{
+        mainMovieData,
+        popularMovieData,
+        userMovieData,
+        setUserMovieData,
+      }}
+    >
       {!isLoading && <App />}
     </IndexContext.Provider>
   );

@@ -57,11 +57,25 @@ nav {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 2rem;
+  gap: 2.3rem;
+
+  & > * {
+    cursor: pointer;
+    transition: transform 100ms ease-in-out;
+  }
+  & > *:hover {
+    transform: scale(1.2);
+  }
 }
 
 #nav--profile {
   border-radius: 50%;
+  transition: border 100ms ease-out;
+  border: 2px solid rgba(0, 0, 0, 0);
+
+  &:hover {
+    border: 2px solid $highlight-color;
+  }
 }
 
 @keyframes fade_in_down {

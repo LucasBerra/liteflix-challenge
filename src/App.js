@@ -10,15 +10,32 @@ import { VscPlay } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const imageUrlOriginal = "https://image.tmdb.org/t/p/original";
+const imageUrlW500 = "https://image.tmdb.org/t/p/w500";
 
 const App = () => {
-  const { mainMovieData } = useContext(IndexContext);
-  const homepageMovie = mainMovieData.results[6]; // specific index
+  const { mainMovieData, userMovieData, setUserMovieData } =
+    useContext(IndexContext);
+
+  const homepageMovie = mainMovieData.results[16]; // USO UNA PELÍCULA EN ESPECÍFICO
 
   // const homepageMovieIndex = Math.floor(
   //   Math.random() * mainMovieData.results.length
   // );
   // const homepageMovie = mainMovieData.results[homepageMovieIndex]; // random index
+
+  const addMovieTolist = () => {
+    const movieObject = {
+      title: homepageMovie.title,
+      img: imageUrlW500 + homepageMovie.backdrop_path,
+      id: homepageMovie.id,
+    };
+
+    if (!userMovieData.some(({ title }) => title === movieObject.title)) {
+      setUserMovieData([...userMovieData, movieObject]);
+    } else {
+      console.log("Ya se agregó esa peli capo (INSERTAR LÓGICA PA AVISAR)");
+    }
+  };
 
   // SETEA LA IMÁGEN DE FONDO
   useEffect(() => {
@@ -40,7 +57,10 @@ const App = () => {
           <div className="homepage_movie--button button--play">
             <VscPlay /> Reproducir
           </div>
-          <div className="homepage_movie--button button--add">
+          <div
+            className="homepage_movie--button button--add"
+            onClick={addMovieTolist}
+          >
             <AiOutlinePlus /> Mi lista
           </div>
         </div>

@@ -12,7 +12,7 @@
 }
 
 $highlight-color: #64eebc;
-$fill-color: rgb(46, 46, 46);
+$fill-color: #242424;
 $animation-delay: 500ms;
 $hover-animation-duration: 200ms;
 
@@ -22,6 +22,8 @@ $hover-animation-duration: 200ms;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-transform: uppercase; // sacar instancias de esta verga en el CSS
+  letter-spacing: 4px;
 }
 
 .font_light {
@@ -37,10 +39,8 @@ p {
 
 body {
   font-family: "BebasNeue Regular";
-  background-color: #181818;
+  background-color: $fill-color;
   color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.25rem;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -99,9 +99,9 @@ body {
 }
 
 .homepage_movie--name {
-  font-size: 5rem;
-  letter-spacing: 1rem;
-  // line-height: 5rem;
+  font-size: 120px;
+  letter-spacing: 16px;
+  line-height: 120px;
   text-shadow: rgba(0, 0, 0, 1) 0 0 20px;
   margin-bottom: 1.5rem;
   color: $highlight-color;
@@ -111,18 +111,16 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 24px;
 }
 
 .homepage_movie--button {
-  height: 3rem;
+  height: 50px;
   width: 220px;
   border: none;
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid rgba(0, 0, 0, 0);
   color: #fff;
-  font-family: "BebasNeue Regular";
-  letter-spacing: 0.25rem;
   cursor: pointer;
 }
 
@@ -140,7 +138,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgb(46, 46, 46);
+    background-color: $fill-color;
     z-index: -1;
   }
 
@@ -157,7 +155,7 @@ body {
     z-index: -1;
   }
   &:hover {
-    color: rgb(46, 46, 46);
+    color: $fill-color;
 
     &::after {
       border: 1px solid $highlight-color;
@@ -172,15 +170,15 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(46, 46, 46, 0.6);
+  background-color: rgba($color: $fill-color, $alpha: 0.6);
   border: 1px solid rgba(255, 255, 255, 0.5);
   transition: all $hover-animation-duration ease-out;
   transition-property: color, background-color, border;
 
   &:hover {
-    color: rgb(46, 46, 46);
+    color: $fill-color;
     background-color: $highlight-color;
-    border: 1px solid rgb(46, 46, 46);
+    border: 1px solid $fill-color;
   }
 
   img {
@@ -189,8 +187,9 @@ body {
 }
 
 .popular_movies {
-  grid-column: 12 / 14;
+  grid-column: 11 / 13;
   grid-row: 2 / 4;
+  max-height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -201,7 +200,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1rem;
 }
@@ -210,16 +209,17 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.25rem;
   cursor: pointer;
   padding: 0.2rem;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba($color: $fill-color, $alpha: 0.6);
   border: 1px solid rgba(0, 0, 0, 0);
   color: #fff;
   font-family: "BebasNeue Regular";
   font-size: 1rem;
-  letter-spacing: 0.25rem;
-  transition: background-color $hover-animation-duration ease-out;
+  transition: all $hover-animation-duration ease-out;
+  transition-property: background-color, color;
 
   &::before {
     position: absolute;
@@ -227,13 +227,14 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    border-bottom: 1px solid blanchedalmond;
+    border-bottom: 1px solid $highlight-color;
     transition: transform 250ms ease-out;
     transform: scaleX(0);
   }
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: $fill-color;
+    color: $highlight-color;
 
     &::before {
       transform: scaleX(1);
@@ -251,7 +252,10 @@ a {
 }
 
 .modal {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
   position: fixed;
   z-index: 2;
   opacity: 0;
@@ -266,17 +270,109 @@ a {
 
 .modal--content {
   display: grid;
-  margin: 15% auto;
-  padding: 20px;
-  width: 450px; /* Could be more or less, depending on screen size */
+  grid-template-columns: 30px 1fr 30px;
+  grid-template-rows: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  padding: 16px;
+  width: 730px;
+  min-height: 440px;
   max-width: 80%;
   background-color: $fill-color;
   animation: fade_in_down 200ms ease-out forwards;
 }
 
+.modal--title {
+  grid-column: 2 / 3;
+  grid-row: 0 / 1;
+  font-size: 20px;
+  font-weight: lighter;
+  color: $highlight-color;
+}
+
 .modal--close {
+  grid-column: 3 / 4;
+  grid-row: 0 / 1;
+  align-self: flex-start;
+  justify-self: flex-end;
   cursor: pointer;
-  float: right;
+  font-size: 20px;
+  transition: all 150ms ease-in-out;
+  transition-property: transform, color;
+  &:hover {
+    transform: scale(1.2);
+    color: $highlight-color;
+  }
+}
+
+.modal--input_img {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-family: "BebasNeue Light";
+  font-size: 16px;
+  width: 100%;
+  height: 100px;
+  border: 1px dashed white;
+
+  & > #image_upload {
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &.modal--clip {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.modal--input_text {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  width: 248px;
+  padding: 10px 0;
+  font-family: "BebasNeue Light";
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 4px;
+  color: white;
+  background-color: $fill-color;
+  border: none;
+  border-bottom: 1px solid white;
+
+  &:focus {
+    outline: 0px solid;
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+
+  &::placeholder {
+    color: white;
+  }
+}
+
+.modal--submit {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  width: 248px;
+  height: 56px;
+  font-size: 18px;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: none;
+  color: #000;
+  font-family: "BebasNeue Regular";
+  letter-spacing: 4px;
+  cursor: pointer;
 }
 
 @keyframes fade_in {
