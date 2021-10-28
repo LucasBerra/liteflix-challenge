@@ -32,7 +32,7 @@ const Index = () => {
 
   useEffect(() => {
     localStorage.setItem("user-movies", JSON.stringify(userMovieData));
-  });
+  }, [userMovieData]);
 
   // Fetchea las APIs
   useEffect(() => {

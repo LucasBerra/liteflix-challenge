@@ -31,7 +31,7 @@ const App = () => {
 
   const addMovieTolist = () => {
     const movieObject = {
-      title: homepageMovie.title,
+      title: homepageMovie.title.toUpperCase(),
       img: imageUrlW500 + homepageMovie.backdrop_path,
       id: homepageMovie.id,
     };
@@ -59,10 +59,6 @@ const App = () => {
     })`;
   }, [homepageMovie.backdrop_path]);
 
-  // useEffect(() => {
-
-  // })
-
   return (
     <>
       <div className="homepage_container">
@@ -70,7 +66,7 @@ const App = () => {
 
         <div className="homepage_movie">
           <p className="font_bold">
-            <span className="font_light"> Ahora disponible en </span>Liteflix
+            <span className="font_light"> Míralo ya en </span>Liteflix
           </p>
           <h1 className="homepage_movie--name">{homepageMovie.title}</h1>
           <div className="homepage_movie--button_container">

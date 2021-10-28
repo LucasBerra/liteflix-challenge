@@ -250,8 +250,9 @@ body {
   line-height: 14px;
   -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-  -webkit-animation: fade_in 100ms ease-in-out;
-          animation: fade_in 100ms ease-in-out;
+  opacity: 0;
+  -webkit-animation: fade_in_up 150ms ease-in-out forwards;
+          animation: fade_in_up 150ms ease-in-out forwards;
 }
 
 .notification_close {
@@ -260,7 +261,7 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.popular_movies {
+.movie_list {
   -ms-grid-column: 11;
   -ms-grid-column-span: 2;
   grid-column: 11 / 13;
@@ -281,7 +282,7 @@ body {
           animation: fade_in 0.5s ease-in-out forwards;
 }
 
-.popular_movies--content {
+.movie_list--content {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -351,11 +352,6 @@ body {
 
 .dropdown_menu {
   position: absolute;
-}
-
-a {
-  text-decoration: none;
-  color: #fff;
 }
 
 .modal {
@@ -540,7 +536,6 @@ a {
   width: 248px;
   height: 56px;
   font-size: 18px;
-  text-transform: uppercase;
   border-radius: 0;
   border: none;
   color: #000;
@@ -611,6 +606,30 @@ a {
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade_in_up {
+  from {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+
+@keyframes fade_in_up {
+  from {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
   }
 }
 

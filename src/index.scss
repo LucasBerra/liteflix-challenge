@@ -47,6 +47,7 @@ body {
 }
 
 @keyframes bg_test {
+  //hay que hacer algo acá papu
 }
 
 .homepage_container {
@@ -205,7 +206,8 @@ body {
   font-size: 14px;
   line-height: 14px;
   box-shadow: 0px 5px 10px rgba($color: #000, $alpha: 0.3);
-  animation: fade_in 100ms ease-in-out;
+  opacity: 0;
+  animation: fade_in_up 150ms ease-in-out forwards;
 }
 
 .notification_close {
@@ -214,7 +216,7 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.popular_movies {
+.movie_list {
   grid-column: 11 / 13;
   grid-row: 2 / 4;
   max-height: 100%;
@@ -224,59 +226,13 @@ body {
   animation: fade_in 0.5s ease-in-out forwards;
 }
 
-.popular_movies--content {
+.movie_list--content {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-}
-
-.dropdown {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.25rem;
-  cursor: pointer;
-  padding: 0.2rem;
-  background-color: rgba($color: $fill-color, $alpha: 0.6);
-  border: 1px solid rgba(0, 0, 0, 0);
-  color: #fff;
-  font-family: "BebasNeue Regular";
-  font-size: 1rem;
-  transition: all $hover-animation-duration ease-out;
-  transition-property: background-color, color;
-
-  &::before {
-    position: absolute;
-    content: "";
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-bottom: 1px solid $highlight-color;
-    transition: transform 250ms ease-out;
-    transform: scaleX(0);
-  }
-
-  &:hover {
-    background-color: $fill-color;
-    color: $highlight-color;
-
-    &::before {
-      transform: scaleX(1);
-    }
-  }
-}
-
-.dropdown_menu {
-  position: absolute;
-}
-
-a {
-  text-decoration: none;
-  color: #fff;
 }
 
 .modal {
@@ -394,7 +350,6 @@ a {
   width: 248px;
   height: 56px;
   font-size: 18px;
-  text-transform: uppercase;
   border-radius: 0;
   border: none;
   color: #000;
@@ -432,8 +387,21 @@ a {
   }
 }
 
+@keyframes fade_in_up {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 @keyframes bg_fill_before {
   to {
     width: 100%;
   }
+}
+
+@media (max-width: 1024px) {
 }
