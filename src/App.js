@@ -57,10 +57,15 @@ const App = () => {
     document.querySelector("body").style.backgroundImage = `url(${
       imageUrlOriginal + homepageMovie.backdrop_path
     })`;
+    document.querySelector(".bg-image").style.backgroundImage = `url(${
+      imageUrlOriginal + homepageMovie.backdrop_path
+    })`;
   }, [homepageMovie.backdrop_path]);
 
   return (
     <>
+      <div className="bg-image"></div>
+
       <div className="homepage_container">
         <Navbar />
 
@@ -84,6 +89,7 @@ const App = () => {
 
         <MovieList />
       </div>
+
       {notification && (
         <NotificationComponent
           setNotification={setNotification}

@@ -12,7 +12,7 @@ import { VscChromeClose } from "react-icons/vsc";
 const imageUrlW500 = "https://image.tmdb.org/t/p/w500";
 
 const MovieList = () => {
-  const { popularMovieData, userMovieData, setUserMovieData } =
+  const { popularMovieData, userMovieData, setUserMovieData, setNotification } =
     useContext(IndexContext);
   const [popularMovies] = useState(popularMovieData.results.slice(0, 4));
   const [showPopular, setShowPopular] = useState(true);
@@ -38,8 +38,16 @@ const MovieList = () => {
             </div>
             <div
               onClick={() => {
-                setShowPopular(false);
-                document.querySelector(".dropdown-button").blur();
+                if (userMovieData.length !== 0) {
+                  setShowPopular(false);
+                  document.querySelector(".dropdown-button").blur();
+                } else {
+                  setNotification("'Mis películas' esta vacía");
+                  setTimeout(() => {
+                    setNotification("");
+                  }, 2000);
+                  document.querySelector(".dropdown-button").blur();
+                }
               }}
             >
               <span>Mis películas</span>
@@ -59,6 +67,7 @@ const MovieList = () => {
                   key={movie.id}
                   userMovieData={userMovieData}
                   setUserMovieData={setUserMovieData}
+                  setShowPopular={setShowPopular}
                 />
               );
             })}
@@ -107,13 +116,24 @@ const PopularMovie = ({ title, backdrop_path, vote_average, release_date }) => {
 };
 
 //PELÍCULAS GUARDADAS
-const SavedMovie = ({ title, img, id, userMovieData, setUserMovieData }) => {
+const SavedMovie = ({
+  title,
+  img,
+  id,
+  userMovieData,
+  setUserMovieData,
+  setShowPopular,
+}) => {
   const [hover, setHover] = useState(false);
   const containerRef = useRef(null);
 
   const removeUserMovie = () => {
     const filteredData = userMovieData.filter((movie) => movie.id !== id);
     setUserMovieData(filteredData);
+
+    if (userMovieData.length === 1) {
+      setShowPopular(true);
+    }
   };
 
   useEffect(() => {

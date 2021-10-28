@@ -117,12 +117,7 @@ $fill-color: #242424;
   }
 
   &:hover {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0) 40%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-    grid-template-columns: 25% 1fr;
+    grid-template-columns: 25% 1fr 25%;
     grid-template-rows: 1fr fit-content;
     /* animation: bg_fade_in 100ms ease-in-out forwards; */
 
@@ -217,6 +212,7 @@ $fill-color: #242424;
 }
 
 .movie_bg {
+  width: 100%;
   background-position: center center;
   background-size: cover;
   border-radius: 3px;
@@ -235,5 +231,43 @@ $fill-color: #242424;
 @keyframes bg_fade_in {
   to {
     background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .movie {
+    height: 170px;
+    width: 100%;
+    max-width: 300px;
+    padding: 0.25rem;
+    border-radius: 3px;
+  }
+
+  .movie--play {
+    transform: scale(2);
+  }
+
+  .movie--name {
+    font-size: 16px;
+  }
+
+  .movie--play_hover {
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+
+    &:hover {
+      height: 30px;
+      width: 30px;
+      background-size: cover;
+    }
+  }
+
+  .movie--rating_hover {
+    justify-self: center;
+  }
+
+  .movie--year_hover {
+    justify-self: center;
   }
 }

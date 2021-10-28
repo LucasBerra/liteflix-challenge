@@ -137,10 +137,8 @@
 }
 
 .movie:hover {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.7)));
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
-  -ms-grid-columns: 25% 1fr;
-      grid-template-columns: 25% 1fr;
+  -ms-grid-columns: 25% 1fr 25%;
+      grid-template-columns: 25% 1fr 25%;
   -ms-grid-rows: 1fr fit-content;
       grid-template-rows: 1fr -webkit-fit-content;
       grid-template-rows: 1fr fit-content;
@@ -287,6 +285,7 @@
 }
 
 .movie_bg {
+  width: 100%;
   background-position: center center;
   background-size: cover;
   border-radius: 3px;
@@ -325,6 +324,41 @@
 @keyframes bg_fade_in {
   to {
     background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .movie {
+    height: 170px;
+    width: 100%;
+    max-width: 300px;
+    padding: 0.25rem;
+    border-radius: 3px;
+  }
+  .movie--play {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+  }
+  .movie--name {
+    font-size: 16px;
+  }
+  .movie--play_hover {
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+  }
+  .movie--play_hover:hover {
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+  }
+  .movie--rating_hover {
+    -ms-grid-column-align: center;
+        justify-self: center;
+  }
+  .movie--year_hover {
+    -ms-grid-column-align: center;
+        justify-self: center;
   }
 }
 /*# sourceMappingURL=MovieList.css.map */
