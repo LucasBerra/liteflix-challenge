@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { IndexContext } from "../../index.js";
-import "./Navbar.css";
+import { IndexContext } from "../index.js";
+import "../styles/Navbar/Navbar.css";
 
 // ASSETS:
-import liteflixLogo from "../../assets/liteflix-logo.svg";
-import UImenu from "../../assets/ui-icons/menu.svg";
-import UInotification from "../../assets/ui-icons/notification.svg";
-import UIprofilePhoto from "../../assets/ui-icons/profile-photo.jpg";
-import UIclip from "../../assets/ui-icons/clip.svg";
+import liteflixLogo from "../assets/liteflix-logo.svg";
+import UImenu from "../assets/ui-icons/menu.svg";
+import UInotification from "../assets/ui-icons/notification.svg";
+import UIprofilePhoto from "../assets/ui-icons/profile-photo.jpg";
+import UIaddMovie from "../assets/ui-icons/add_movie.svg";
+import UIclip from "../assets/ui-icons/clip.svg";
 import { AiOutlinePlus } from "react-icons/ai";
 import { VscChromeClose } from "react-icons/vsc";
 
@@ -19,31 +20,45 @@ const Navbar = () => {
       {modal && <Modal setModal={setModal} />}
 
       <nav className="grid_layout">
+        <img
+          src={UIaddMovie}
+          alt="Agregar película (mobile)"
+          className="nav--add-movie-mobile"
+          onClick={() => setModal(true)}
+        />
+
         <div className="nav-left">
-          <img src={liteflixLogo} alt="Liteflix logo" id="nav--logo" />
+          <img src={liteflixLogo} alt="Logo de Liteflix" id="nav--logo" />
           <div className="nav--add-movie" onClick={() => setModal(true)}>
             <AiOutlinePlus />
             <span> agregar película</span>
           </div>
         </div>
+
         <div className="nav-right">
-          <img src={UImenu} alt="menu icon" id="nav--menu" />
+          <img
+            src={UImenu}
+            alt="Ícono de menu"
+            id="nav--menu"
+            className="hide-in-mobile"
+          />
           <img
             src={UInotification}
-            alt="ícono de notificación"
+            alt="Ícono de notificación"
             id="nav--notification"
+            className="hide-in-mobile"
           />
-          <img src={UIprofilePhoto} alt="foto de perfil" id="nav--profile" />
+          <img src={UIprofilePhoto} alt="Foto de perfil" id="nav--profile" />
         </div>
       </nav>
     </>
   );
 };
 
-const convertToBase64 = (file) => {
+const convertToBase64 = (img) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(img);
 
     reader.onload = () => {
       resolve(reader.result);
@@ -63,7 +78,17 @@ const Modal = ({ setModal }) => {
   const [movieSubmitted, setMovieSubmitted] = useState(false);
 
   const onImgUpload = async (e) => {
-    // setUserImg(URL.createObjectURL(e.target.files[0]));
+    if (e.target.files[0].size > 1048576) {
+      const bigFile = document.querySelector("#image_upload");
+      bigFile.value = "";
+
+      setNotification("Tamaño de imágen excedido (1mb)");
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
+      return;
+    }
+
     const base64URL = await convertToBase64(e.target.files[0]);
     setUserImg(base64URL);
 
@@ -86,8 +111,6 @@ const Modal = ({ setModal }) => {
         setNotification("");
       }, 2000);
     }
-
-    // localStorage.setItem("userMovieData", JSON.stringify(userMovieData));
   };
 
   const closeModal = () => {
@@ -106,21 +129,32 @@ const Modal = ({ setModal }) => {
     <div className="modal" id="modal">
       {movieSubmitted ? (
         <div className="modal--content">
+          <VscChromeClose
+            className="modal--close hide-on-mobile"
+            onClick={closeModal}
+          />
+          <img
+            src={UIprofilePhoto}
+            alt="Foto de perfil"
+            className="modal--profile hide-outside-mobile"
+          />
+
           <img
             src={liteflixLogo}
             alt="Liteflix Logo"
             className="modal--title"
           />
-          <VscChromeClose className="modal--close" onClick={closeModal} />
 
           <div className="modal--submitted">
             <h3>¡Felicitaciones!</h3>
             <p>{userTitle} fue correctamente subida.</p>
           </div>
 
-          <button className="modal--button" onClick={closeModal}>
-            Ir a Home
-          </button>
+          <div className="modal--button_container">
+            <button className="modal--button" onClick={closeModal}>
+              Ir a Home
+            </button>
+          </div>
         </div>
       ) : (
         <form
@@ -128,13 +162,30 @@ const Modal = ({ setModal }) => {
           onSubmit={handleSubmit}
           autoComplete="off"
         >
+          <VscChromeClose
+            className="modal--close hide-on-mobile"
+            onClick={closeModal}
+          />
+          <img
+            src={UIprofilePhoto}
+            alt="Foto de perfil"
+            className="modal--profile hide-outside-mobile"
+          />
+
+          <img
+            src={liteflixLogo}
+            alt="Logo de Liteflix"
+            className="modal--logo hide-outside-mobile"
+          />
           <h3 className="modal--title">Agregar película</h3>
-          <VscChromeClose className="modal--close" onClick={closeModal} />
 
           <label htmlFor="image_upload" className="modal--input_img">
             <img src={UIclip} alt="Clip" />
             <p className="modal--input_img_text">
-              <b>Agregá un archivo</b> o arrastralo y soltalo aquí
+              <b>Agregá un archivo</b>{" "}
+              <span className="hide-in-mobile">
+                o arrastralo y soltalo aquí
+              </span>
             </p>
 
             <input
@@ -156,9 +207,18 @@ const Modal = ({ setModal }) => {
             onChange={(e) => setUserTitle(e.target.value.toUpperCase())}
           />
 
-          <button type="submit" className="modal--button" disabled>
-            Subir película
-          </button>
+          <div className="modal--button_container">
+            <button type="submit" className="modal--button" disabled>
+              Subir película
+            </button>
+
+            <div
+              className="modal--button modal--close_button hide-outside-mobile"
+              onClick={closeModal}
+            >
+              Salir
+            </div>
+          </div>
         </form>
       )}
     </div>

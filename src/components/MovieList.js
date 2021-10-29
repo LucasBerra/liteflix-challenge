@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { IndexContext } from "../../index";
-import "./MovieList.css";
+import { IndexContext } from "../index";
+import "../styles/MovieList/MovieList.css";
 
 // ASSETS:
-import UIplay from "../../assets/ui-icons/play.svg";
-import UIstar from "../../assets/ui-icons/star.svg";
+import UIplay from "../assets/ui-icons/play.svg";
+import UIstar from "../assets/ui-icons/star.svg";
 import { BiChevronDown } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
@@ -56,21 +56,23 @@ const MovieList = () => {
           </div>
         </button>
 
-        {showPopular
-          ? popularMovies.map((movie) => {
-              return <PopularMovie {...movie} key={movie.id} />;
-            })
-          : userMovieData.map((movie) => {
-              return (
-                <SavedMovie
-                  {...movie}
-                  key={movie.id}
-                  userMovieData={userMovieData}
-                  setUserMovieData={setUserMovieData}
-                  setShowPopular={setShowPopular}
-                />
-              );
-            })}
+        <div className="movie_list--map">
+          {showPopular
+            ? popularMovies.map((movie) => {
+                return <PopularMovie {...movie} key={movie.id} />;
+              })
+            : userMovieData.map((movie) => {
+                return (
+                  <SavedMovie
+                    {...movie}
+                    key={movie.id}
+                    userMovieData={userMovieData}
+                    setUserMovieData={setUserMovieData}
+                    setShowPopular={setShowPopular}
+                  />
+                );
+              })}
+        </div>
       </div>
     </div>
   );
@@ -146,6 +148,7 @@ const SavedMovie = ({
       className="movie_bg"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={() => setHover(true)}
     >
       {/* RENDERIZADO CONDICIONAL CON TERNARIO */}
       {hover ? (

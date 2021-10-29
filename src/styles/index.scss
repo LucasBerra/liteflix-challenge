@@ -1,19 +1,30 @@
+// -------------------------
+//  Orden de datos de CSS:
+//
+//  - Imports y variables
+//  - Estilizado
+//  - Media queries
+//  - Animaciones
+// -------------------------
+//  Mobile breakpoint: 576px
+// -------------------------
+
 @font-face {
   font-family: "BebasNeue Light";
-  src: url("./assets/fonts/BebasNeue\ Light.otf");
+  src: url("../assets/fonts/BebasNeue\ Light.otf");
 }
 @font-face {
   font-family: "BebasNeue Regular";
-  src: url("./assets/fonts/BebasNeue\ Regular.otf");
+  src: url("../assets/fonts/BebasNeue\ Regular.otf");
 }
 @font-face {
   font-family: "BebasNeue Bold";
-  src: url("./assets/fonts/BebasNeue\ Bold.otf");
+  src: url("../assets/fonts/BebasNeue\ Bold.otf");
 }
 
 $highlight-color: #64eebc;
+$highlight-color-active: #36c28e;
 $fill-color: #242424;
-$animation-delay: 500ms;
 $hover-animation-duration: 200ms;
 
 *,
@@ -22,8 +33,25 @@ $hover-animation-duration: 200ms;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  text-transform: uppercase; // sacar instancias de esta verga en el CSS
+  text-transform: uppercase;
   letter-spacing: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #6969dd #e0e0e0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  &:hover {
+    transform: scaleX(2);
+  }
+}
+::-webkit-scrollbar-track {
+  background-color: $fill-color;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba($color: #fff, $alpha: 0.8);
+  border-radius: 4px;
 }
 
 .font_light {
@@ -35,6 +63,10 @@ $hover-animation-duration: 200ms;
 
 p {
   font-size: 1rem;
+}
+
+.hide-outside-mobile {
+  display: none;
 }
 
 body {
@@ -61,7 +93,7 @@ body {
   padding: 2rem 5rem;
   background: linear-gradient(
     0deg,
-    rgba($color: $fill-color, $alpha: 0.3) 70%,
+    rgba($color: #000, $alpha: 0.4) 70%,
     rgba($color: $fill-color, $alpha: 1) 100%
   );
   grid-template-columns: repeat(12, 1fr);
@@ -100,7 +132,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
     animation: bg_fill_before 0.75s ease-in-out forwards;
-    animation-delay: $animation-delay;
+    animation-delay: 0.5s;
   }
 }
 
@@ -135,7 +167,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
   z-index: 1;
   transition: color $hover-animation-duration ease-out;
 
@@ -175,7 +206,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
   background-color: rgba($color: $fill-color, $alpha: 0.6);
   border: 1px solid rgba(255, 255, 255, 0.5);
   transition: all $hover-animation-duration ease-out;
@@ -192,16 +222,22 @@ body {
   }
 }
 
+.homepage_movie--button_text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .notification {
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: fixed;
   z-index: 2;
-  width: 280px;
+  width: 300px;
   bottom: 10%;
   left: 50%;
-  margin-left: -140px;
+  margin-left: -150px;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
@@ -209,7 +245,6 @@ body {
   color: #000;
   font-weight: bold;
   font-size: 14px;
-  line-height: 14px;
   box-shadow: 0px 5px 10px rgba($color: #000, $alpha: 0.3);
   opacity: 0;
   animation: fade_in_up 150ms ease-in-out forwards;
@@ -221,194 +256,48 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.movie_list {
-  grid-column: 11 / 13;
-  grid-row: 2 / 4;
-  max-height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  animation: fade_in 0.5s ease-in-out forwards;
-}
+// --------------------------------------//
+//             MEDIA QUERIES             //
+// --------------------------------------//
 
-.movie_list--content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-}
+@media (max-width: 1024px) {
+  .homepage_container {
+    padding: 32px;
+  }
 
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-y: auto;
-  position: fixed;
-  z-index: 2;
-  opacity: 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.6);
-  animation: fade_in 200ms ease-out forwards;
-}
-
-.modal--content {
-  display: grid;
-  grid-template-columns: 30px 1fr 30px;
-  grid-template-rows: repeat(4, 1fr);
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-  padding: 16px;
-  width: 730px;
-  min-height: 440px;
-  max-width: 80%;
-  background-color: $fill-color;
-  animation: fade_in_down 200ms ease-out forwards;
-}
-
-.modal--title {
-  grid-column: 2 / 3;
-  grid-row: 0 / 1;
-  font-size: 20px;
-  font-weight: lighter;
-  color: $highlight-color;
-}
-
-.modal--close {
-  grid-column: 3 / 4;
-  grid-row: 0 / 1;
-  align-self: flex-start;
-  justify-self: flex-end;
-  cursor: pointer;
-  font-size: 20px;
-  transition: all 150ms ease-in-out;
-  transition-property: transform, color;
-  &:hover {
-    transform: scale(1.2);
-    color: $highlight-color;
+  .homepage_movie--name {
+    font-size: 100px;
+    letter-spacing: 14px;
+    line-height: 100px;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 0 12px;
   }
 }
 
-.modal--input_img {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  font-family: "BebasNeue Light";
-  font-size: 16px;
-  width: 100%;
-  height: 100px;
-  border: 1px dashed white;
-
-  & > #image_upload {
-    position: absolute;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
+@media (max-width: 840px) {
+  .homepage_movie--name {
+    font-size: 80px;
+    letter-spacing: 12px;
+    line-height: 80px;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 0 10px;
   }
 
-  &.modal--clip {
-    width: 50px;
-    height: 50px;
+  .homepage_movie--button_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 }
 
-.modal--input_text {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
-  width: 248px;
-  padding: 10px 0;
-  font-family: "BebasNeue Light";
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 4px;
-  color: white;
-  background-color: $fill-color;
-  border: none;
-  border-bottom: 1px solid white;
-
-  &:focus {
-    outline: 0px solid;
-    &::placeholder {
-      opacity: 0.5;
-    }
+@media (max-width: 576px) {
+  .hide-in-mobile {
+    display: none;
   }
 
-  &::placeholder {
-    color: white;
+  .hide-outside-mobile {
+    display: block;
   }
-}
 
-.modal--button {
-  grid-column: 2 / 3;
-  grid-row: 4 / 5;
-  width: 248px;
-  height: 56px;
-  font-size: 18px;
-  border-radius: 0;
-  border: none;
-  color: #000;
-  font-family: "BebasNeue Regular";
-  letter-spacing: 4px;
-  cursor: pointer;
-}
-
-.modal--submitted {
-  grid-column: 2 / 3;
-  grid-row: 2 / 4;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-}
-
-@keyframes fade_in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade_in_down {
-  from {
-    transform: translateY(-20px);
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
-
-@keyframes fade_in_up {
-  from {
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
-
-@keyframes bg_fill_before {
-  to {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
   body {
     background-color: $fill-color;
     background-position: top center;
@@ -433,7 +322,7 @@ body {
     padding: 0;
     background: linear-gradient(
       /* CAMBIAR? */ 0deg,
-      rgba($color: #000, $alpha: 0.3) 90%,
+      rgba($color: #000, $alpha: 0.4) 90%,
       rgba($color: $fill-color, $alpha: 1) 100%
     );
     width: 100%;
@@ -454,9 +343,6 @@ body {
     opacity: 0;
     grid-column: 1 / 4;
     grid-row: 2 / 3;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: flex-end;
     align-items: center;
     text-align: center;
     animation: fade_in 0.5s ease-in-out forwards;
@@ -470,15 +356,8 @@ body {
   .homepage_movie--name {
     font-size: 76px;
     letter-spacing: 12px;
-    line-height: 76px;
+    line-height: 77px;
     text-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
-  }
-
-  .homepage_movie--button_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
   }
 
   .notification {
@@ -497,39 +376,49 @@ body {
   .notification_close {
     font-size: 20px;
   }
+}
 
-  .movie_list {
-    position: relative;
-    grid-column: 1 / 4;
-    grid-row: 3 / 4;
+// ------------------------------------//
+//             ANIMACIONES             //
+// ------------------------------------//
+
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade_in_up {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade_in_down {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes bg_fill_before {
+  to {
     width: 100%;
-    display: flex;
-    margin-top: 54px;
-    justify-content: center;
-    align-items: center;
-    animation: fade_in 0.5s ease-in-out forwards;
-    overflow-y: visible;
-
-    &::before {
-      position: absolute;
-      content: "";
-      width: 100%;
-      height: 100%;
-      z-index: -100;
-      background-color: $fill-color;
-      box-shadow: 0 -100px 60px 50px $fill-color;
-    }
   }
+}
 
-  .movie_list--content {
-    grid-row: 3 / 4;
-    width: 90%;
-    max-width: 300px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
-  }
+@keyframes button_play {
+}
+
+@keyframes button_add {
 }

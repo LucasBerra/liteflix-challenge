@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { IndexContext } from "./index.js";
 
 // COMPONENTES :
-import Navbar from "./components/Navbar/Navbar.js";
-import MovieList from "./components/MovieList/MovieList.js";
+import Navbar from "./components/Navbar.js";
+import MovieList from "./components/MovieList.js";
 
 // ASSETS :
 import { VscPlay } from "react-icons/vsc";
@@ -22,7 +22,9 @@ const App = () => {
     setNotification,
   } = useContext(IndexContext);
 
-  const homepageMovie = mainMovieData.results[9]; // USO UNA PELÍCULA EN ESPECÍFICO
+  const homepageMovie = mainMovieData.results
+    .filter(({ title }) => title === "After We Fell")
+    .pop();
 
   // const homepageMovieIndex = Math.floor(
   //   Math.random() * mainMovieData.results.length
@@ -57,6 +59,7 @@ const App = () => {
     document.querySelector("body").style.backgroundImage = `url(${
       imageUrlOriginal + homepageMovie.backdrop_path
     })`;
+
     document.querySelector(".bg-image").style.backgroundImage = `url(${
       imageUrlOriginal + homepageMovie.backdrop_path
     })`;
@@ -76,13 +79,17 @@ const App = () => {
           <h1 className="homepage_movie--name">{homepageMovie.title}</h1>
           <div className="homepage_movie--button_container">
             <div className="homepage_movie--button button--play">
-              <VscPlay /> Reproducir
+              <span className="homepage_movie--button_text">
+                <VscPlay /> Reproducir
+              </span>
             </div>
             <div
               className="homepage_movie--button button--add"
               onClick={addMovieTolist}
             >
-              <AiOutlinePlus /> Mi lista
+              <span className="homepage_movie--button_text">
+                <AiOutlinePlus /> Mi lista
+              </span>
             </div>
           </div>
         </div>
