@@ -20,10 +20,7 @@ const MovieList = () => {
   return (
     <div className="movie_list">
       <div className="movie_list--content">
-        <button
-          className="dropdown-button"
-          // onClick={() => setShowPopular(!showPopular)}
-        >
+        <button className="dropdown-button">
           <span className="font_light">Ver: </span>
           {showPopular ? "Populares" : "Mis Películas"} <BiChevronDown />
           <div className="dropdown-menu">

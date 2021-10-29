@@ -414,10 +414,10 @@ nav {
     padding: 10px 14px;
     width: 100%;
     max-width: 100%;
-    min-height: 100%;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
+    min-height: 100vh;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
     overflow: auto;
   }
   .modal--logo {

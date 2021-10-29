@@ -31,7 +31,7 @@ const App = () => {
   // );
   // const homepageMovie = mainMovieData.results[homepageMovieIndex]; // random index
 
-  const addMovieTolist = () => {
+  const addHomepageMovieToList = () => {
     const movieObject = {
       title: homepageMovie.title.toUpperCase(),
       img: imageUrlW500 + homepageMovie.backdrop_path,
@@ -85,7 +85,7 @@ const App = () => {
             </div>
             <div
               className="homepage_movie--button button--add"
-              onClick={addMovieTolist}
+              onClick={addHomepageMovieToList}
             >
               <span className="homepage_movie--button_text">
                 <AiOutlinePlus /> Mi lista
