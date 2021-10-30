@@ -161,7 +161,12 @@ const SavedMovie = ({
         </div>
       ) : (
         <div className="movie">
-          <VscChromeClose className="movie--remove" />
+          <VscChromeClose
+            className="movie--remove"
+            onClick={() =>
+              removeUserMovie(userMovieData, setUserMovieData, title)
+            }
+          />
           <img src={UIplay} alt="Play button" className="movie--play" />
           <p className="movie--name">{title}</p>
         </div>
