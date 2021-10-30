@@ -28,16 +28,6 @@ const App = () => {
     .filter(({ title }) => title === "Night Teeth")
     .pop();
 
-  //----------------------------------------------------------------------------------
-  // -- Lógica para usar una película aleatoria como destacada.
-  // -- Habrá un deploy con una versión de la página con esta lógica.
-  //
-  // const homepageMovieIndex = Math.floor(
-  //   Math.random() * mainMovieData.results.length
-  // );
-  // const homepageMovie = mainMovieData.results[homepageMovieIndex];
-  //----------------------------------------------------------------------------------
-
   // Agregar película destacada a 'Mis Películas'
   const addHomepageMovieToList = () => {
     const movieObject = {
