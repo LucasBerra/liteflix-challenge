@@ -10,6 +10,7 @@ import { VscPlay } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { VscChromeClose } from "react-icons/vsc";
 
+// Links para setear imágenes fetcheadas
 const imageUrlOriginal = "https://image.tmdb.org/t/p/original";
 const imageUrlW500 = "https://image.tmdb.org/t/p/w500";
 
@@ -22,15 +23,22 @@ const App = () => {
     setNotification,
   } = useContext(IndexContext);
 
+  // Se eligió una película específica
   const homepageMovie = mainMovieData.results
     .filter(({ title }) => title === "Night Teeth")
     .pop();
 
+  //----------------------------------------------------------------------------------
+  // -- Lógica para usar una película aleatoria como destacada.
+  // -- Habrá un deploy con una versión de la página con esta lógica.
+  //
   // const homepageMovieIndex = Math.floor(
   //   Math.random() * mainMovieData.results.length
   // );
-  // const homepageMovie = mainMovieData.results[homepageMovieIndex]; // random index
+  // const homepageMovie = mainMovieData.results[homepageMovieIndex];
+  //----------------------------------------------------------------------------------
 
+  // Agregar película destacada a 'Mis Películas'
   const addHomepageMovieToList = () => {
     const movieObject = {
       title: homepageMovie.title.toUpperCase(),
@@ -42,19 +50,18 @@ const App = () => {
       setUserMovieData([...userMovieData, movieObject]);
 
       setNotification("La película fue guardada");
-      // se esconderá la notificación después de 2 segundos
       setTimeout(() => {
         setNotification("");
-      }, 2000);
+      }, 1500);
     } else {
       setNotification("La película ya se agregó");
       setTimeout(() => {
         setNotification("");
-      }, 2000);
+      }, 1500);
     }
   };
 
-  // SETEA LA IMÁGEN DE FONDO
+  // Setea el background-image para desktop y mobile
   useEffect(() => {
     document.querySelector("body").style.backgroundImage = `url(${
       imageUrlOriginal + homepageMovie.backdrop_path
@@ -110,7 +117,7 @@ const App = () => {
 const NotificationComponent = ({ notification, setNotification }) => {
   return (
     <div className="notification">
-      {/* El texto se agregará al mostrarse la notificación*/}
+      {/* El texto se setea al mostrar la notificación */}
       <p id="notification-text">{notification}</p>
       <VscChromeClose
         className="notification_close"

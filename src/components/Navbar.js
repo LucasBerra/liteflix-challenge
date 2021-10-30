@@ -55,6 +55,7 @@ const Navbar = () => {
   );
 };
 
+// Convertir imágen a base64 para evitar link temporal
 const convertToBase64 = (img) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -78,6 +79,7 @@ const Modal = ({ setModal }) => {
   const [movieSubmitted, setMovieSubmitted] = useState(false);
 
   const onImgUpload = async (e) => {
+    // Límite de tamaño de imágen de 1mb
     if (e.target.files[0].size > 1048576) {
       const bigFile = document.querySelector("#image_upload");
       bigFile.value = "";
@@ -85,7 +87,7 @@ const Modal = ({ setModal }) => {
       setNotification("Tamaño de imágen excedido (1mb)");
       setTimeout(() => {
         setNotification("");
-      }, 2000);
+      }, 1500);
       return;
     }
 
@@ -109,7 +111,7 @@ const Modal = ({ setModal }) => {
       setNotification("La película ya se agregó");
       setTimeout(() => {
         setNotification("");
-      }, 2000);
+      }, 1500);
     }
   };
 

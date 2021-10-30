@@ -9,6 +9,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
 
+// Link para setear imágen de miniatura
 const imageUrlW500 = "https://image.tmdb.org/t/p/w500";
 
 const MovieList = () => {
@@ -42,7 +43,7 @@ const MovieList = () => {
                   setNotification("'Mis películas' esta vacía");
                   setTimeout(() => {
                     setNotification("");
-                  }, 2000);
+                  }, 1500);
                   document.querySelector(".dropdown-button").blur();
                 }
               }}
@@ -75,7 +76,7 @@ const MovieList = () => {
   );
 };
 
-// PELÍCULAS POPULARES
+// Películas populares
 const PopularMovie = ({ title, backdrop_path, vote_average, release_date }) => {
   const [hover, setHover] = useState(false);
   const containerRef = useRef(null);
@@ -114,7 +115,7 @@ const PopularMovie = ({ title, backdrop_path, vote_average, release_date }) => {
   );
 };
 
-//PELÍCULAS GUARDADAS
+// Películas guardadas por el usuario
 const SavedMovie = ({
   title,
   img,
@@ -147,7 +148,6 @@ const SavedMovie = ({
       onMouseLeave={() => setHover(false)}
       onClick={() => setHover(true)}
     >
-      {/* RENDERIZADO CONDICIONAL CON TERNARIO */}
       {hover ? (
         <div className="movie">
           <VscChromeClose
