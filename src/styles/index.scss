@@ -129,10 +129,11 @@ body {
     position: absolute;
     height: 100%;
     width: 0%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: $fill-color;
     z-index: -1;
-    animation: bg_fill_before 0.75s ease-in-out forwards;
-    animation-delay: 0.5s;
+    animation: fade_in 0.5s ease-in-out forwards,
+      bg_fill_start 600ms ease-in-out, bg_fill_end 600ms ease-in-out forwards;
+    animation-delay: 250ms, 800ms, 1400ms;
   }
 }
 
@@ -143,6 +144,9 @@ body {
   text-shadow: rgba(0, 0, 0, 0.5) 0 0 16px;
   margin-bottom: 1.5rem;
   color: $highlight-color;
+  opacity: 0;
+  animation: fade_in_right 0.5s ease-out forwards;
+  animation-delay: 150ms;
 }
 
 .homepage_movie--button_container {
@@ -173,10 +177,13 @@ body {
   &::before {
     content: "";
     position: absolute;
+    bottom: 0;
     width: 100%;
-    height: 100%;
+    height: 0%;
     background-color: $fill-color;
     z-index: -1;
+    animation: button_play 800ms ease-in-out forwards;
+    animation-delay: 600ms;
   }
 
   &::after {
@@ -187,16 +194,24 @@ body {
     width: 100%;
     height: 0%;
     background-color: $highlight-color;
-    // opacity: 0.5;
+    opacity: 0;
     transition: height $hover-animation-duration ease-out;
     z-index: -1;
+    animation: fade_in 250ms linear forwards;
+    animation-delay: 1400ms;
   }
   &:hover {
     color: $fill-color;
-
     &::after {
       border: 1px solid $highlight-color;
       height: 100%;
+    }
+  }
+
+  &:active {
+    &::after {
+      background-color: $highlight-color-active;
+      border-color: $highlight-color-active;
     }
   }
 }
@@ -206,15 +221,52 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba($color: $fill-color, $alpha: 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: all $hover-animation-duration ease-out;
-  transition-property: color, background-color, border;
+  background-color: rgba(0, 0, 0, 0);
+  transition: color $hover-animation-duration ease-out;
+  z-index: 1;
+
+  &::before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 0%;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: -1;
+    opacity: 0;
+    transition-property: color;
+    animation: button_add--border 800ms ease-in-out forwards,
+      button_add--bg-color 500ms ease-in-out forwards;
+    animation-delay: 600ms, 1000ms;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: all $hover-animation-duration ease-out;
+    transition-property: background-color, border;
+    animation: fade_in 250ms linear forwards;
+    animation-delay: 1400ms;
+  }
 
   &:hover {
     color: $fill-color;
-    background-color: $highlight-color;
-    border: 1px solid $fill-color;
+    &::after {
+      background-color: rgba($color: $highlight-color, $alpha: 0.9);
+      border: 1px solid $fill-color;
+    }
+  }
+
+  &:active {
+    &::after {
+      transition: background-color 0ms;
+      background-color: rgba($color: $highlight-color-active, $alpha: 0.9);
+    }
   }
 
   img {
@@ -226,6 +278,9 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  opacity: 0;
+  animation: fade_in_up 350ms ease-out forwards;
+  animation-delay: 1300ms;
 }
 
 .notification {
@@ -327,7 +382,7 @@ body {
     );
     width: 100%;
     grid-template-columns: 10% 1fr 10%;
-    grid-template-rows: auto minmax(480px, max-content) auto;
+    grid-template-rows: auto minmax(500px, max-content) auto;
     gap: 0px;
     row-gap: 10px;
   }
@@ -358,6 +413,8 @@ body {
     letter-spacing: 12px;
     line-height: 77px;
     text-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
+    margin-top: 16px;
+    animation: fade_in 0.5s ease-out forwards;
   }
 
   .notification {
@@ -411,14 +468,84 @@ body {
   }
 }
 
-@keyframes bg_fill_before {
+@keyframes fade_in_right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes bg_fill_start {
   to {
     width: 100%;
   }
 }
 
-@keyframes button_play {
+@keyframes bg_fill_end {
+  from {
+    width: 100%;
+    right: 0;
+  }
+
+  to {
+    width: 0%;
+    right: 0;
+  }
 }
 
-@keyframes button_add {
+@keyframes button_play {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes button_add--border {
+  from {
+    width: 0%;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes button_add--bg-color {
+  from {
+    background-color: rgba($color: $fill-color, $alpha: 0);
+  }
+  to {
+    background-color: rgba($color: $fill-color, $alpha: 0.5);
+  }
+}
+
+@keyframes movie_list_color {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes movie_list_show {
+  from {
+    opacity: 1;
+    height: 100%;
+  }
+  99% {
+    opacity: 1;
+    height: 0%;
+  }
+  to {
+    opacity: 0;
+    height: 0%;
+  }
 }

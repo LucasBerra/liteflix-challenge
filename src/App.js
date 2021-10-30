@@ -23,7 +23,7 @@ const App = () => {
   } = useContext(IndexContext);
 
   const homepageMovie = mainMovieData.results
-    .filter(({ title }) => title === "After We Fell")
+    .filter(({ title }) => title === "Night Teeth")
     .pop();
 
   // const homepageMovieIndex = Math.floor(

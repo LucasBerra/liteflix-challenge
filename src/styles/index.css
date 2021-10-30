@@ -140,12 +140,12 @@ body {
   position: absolute;
   height: 100%;
   width: 0%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #242424;
   z-index: -1;
-  -webkit-animation: bg_fill_before 0.75s ease-in-out forwards;
-          animation: bg_fill_before 0.75s ease-in-out forwards;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
+  -webkit-animation: fade_in 0.5s ease-in-out forwards, bg_fill_start 600ms ease-in-out, bg_fill_end 600ms ease-in-out forwards;
+          animation: fade_in 0.5s ease-in-out forwards, bg_fill_start 600ms ease-in-out, bg_fill_end 600ms ease-in-out forwards;
+  -webkit-animation-delay: 250ms, 800ms, 1400ms;
+          animation-delay: 250ms, 800ms, 1400ms;
 }
 
 .homepage_movie--name {
@@ -155,6 +155,11 @@ body {
   text-shadow: rgba(0, 0, 0, 0.5) 0 0 16px;
   margin-bottom: 1.5rem;
   color: #64eebc;
+  opacity: 0;
+  -webkit-animation: fade_in_right 0.5s ease-out forwards;
+          animation: fade_in_right 0.5s ease-out forwards;
+  -webkit-animation-delay: 150ms;
+          animation-delay: 150ms;
 }
 
 .homepage_movie--button_container {
@@ -198,10 +203,15 @@ body {
 .button--play::before {
   content: "";
   position: absolute;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: 0%;
   background-color: #242424;
   z-index: -1;
+  -webkit-animation: button_play 800ms ease-in-out forwards;
+          animation: button_play 800ms ease-in-out forwards;
+  -webkit-animation-delay: 600ms;
+          animation-delay: 600ms;
 }
 
 .button--play::after {
@@ -212,9 +222,14 @@ body {
   width: 100%;
   height: 0%;
   background-color: #64eebc;
+  opacity: 0;
   -webkit-transition: height 200ms ease-out;
   transition: height 200ms ease-out;
   z-index: -1;
+  -webkit-animation: fade_in 250ms linear forwards;
+          animation: fade_in 250ms linear forwards;
+  -webkit-animation-delay: 1400ms;
+          animation-delay: 1400ms;
 }
 
 .button--play:hover {
@@ -224,6 +239,11 @@ body {
 .button--play:hover::after {
   border: 1px solid #64eebc;
   height: 100%;
+}
+
+.button--play:active::after {
+  background-color: #36c28e;
+  border-color: #36c28e;
 }
 
 .button--add {
@@ -237,18 +257,60 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgba(36, 36, 36, 0.6);
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-transition: color 200ms ease-out;
+  transition: color 200ms ease-out;
+  z-index: 1;
+}
+
+.button--add::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 0%;
+  height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-animation: button_add--border 800ms ease-in-out forwards, button_add--bg-color 500ms ease-in-out forwards;
+          animation: button_add--border 800ms ease-in-out forwards, button_add--bg-color 500ms ease-in-out forwards;
+  -webkit-animation-delay: 600ms, 1000ms;
+          animation-delay: 600ms, 1000ms;
+}
+
+.button--add::after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
   -webkit-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
-  -webkit-transition-property: color, background-color, border;
-  transition-property: color, background-color, border;
+  -webkit-transition-property: background-color, border;
+  transition-property: background-color, border;
+  -webkit-animation: fade_in 250ms linear forwards;
+          animation: fade_in 250ms linear forwards;
+  -webkit-animation-delay: 1400ms;
+          animation-delay: 1400ms;
 }
 
 .button--add:hover {
   color: #242424;
-  background-color: #64eebc;
+}
+
+.button--add:hover::after {
+  background-color: rgba(100, 238, 188, 0.9);
   border: 1px solid #242424;
+}
+
+.button--add:active::after {
+  -webkit-transition: background-color 0ms;
+  transition: background-color 0ms;
+  background-color: rgba(54, 194, 142, 0.9);
 }
 
 .button--add img {
@@ -263,6 +325,11 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 10px;
+  opacity: 0;
+  -webkit-animation: fade_in_up 350ms ease-out forwards;
+          animation: fade_in_up 350ms ease-out forwards;
+  -webkit-animation-delay: 1300ms;
+          animation-delay: 1300ms;
 }
 
 .notification {
@@ -367,9 +434,9 @@ body {
     width: 100%;
     -ms-grid-columns: 10% 1fr 10%;
         grid-template-columns: 10% 1fr 10%;
-    -ms-grid-rows: auto minmax(480px, max-content) auto;
-        grid-template-rows: auto minmax(480px, -webkit-max-content) auto;
-        grid-template-rows: auto minmax(480px, max-content) auto;
+    -ms-grid-rows: auto minmax(500px, max-content) auto;
+        grid-template-rows: auto minmax(500px, -webkit-max-content) auto;
+        grid-template-rows: auto minmax(500px, max-content) auto;
     gap: 0px;
     row-gap: 10px;
   }
@@ -409,6 +476,9 @@ body {
     letter-spacing: 12px;
     line-height: 77px;
     text-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
+    margin-top: 16px;
+    -webkit-animation: fade_in 0.5s ease-out forwards;
+            animation: fade_in 0.5s ease-out forwards;
   }
   .notification {
     z-index: 2;
@@ -494,19 +564,173 @@ body {
   }
 }
 
-@-webkit-keyframes bg_fill_before {
+@-webkit-keyframes fade_in_right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(30px);
+            transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+
+@keyframes fade_in_right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(30px);
+            transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+
+@-webkit-keyframes bg_fill_start {
   to {
     width: 100%;
   }
 }
 
-@keyframes bg_fill_before {
+@keyframes bg_fill_start {
   to {
     width: 100%;
   }
 }
 
-@-webkit-keyframes button_play {}
+@-webkit-keyframes bg_fill_end {
+  from {
+    width: 100%;
+    right: 0;
+  }
+  to {
+    width: 0%;
+    right: 0;
+  }
+}
 
-@keyframes button_play {}@-webkit-keyframes button_add {}@keyframes button_add {}
+@keyframes bg_fill_end {
+  from {
+    width: 100%;
+    right: 0;
+  }
+  to {
+    width: 0%;
+    right: 0;
+  }
+}
+
+@-webkit-keyframes button_play {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes button_play {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@-webkit-keyframes button_add--border {
+  from {
+    width: 0%;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes button_add--border {
+  from {
+    width: 0%;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes button_add--bg-color {
+  from {
+    background-color: rgba(36, 36, 36, 0);
+  }
+  to {
+    background-color: rgba(36, 36, 36, 0.5);
+  }
+}
+
+@keyframes button_add--bg-color {
+  from {
+    background-color: rgba(36, 36, 36, 0);
+  }
+  to {
+    background-color: rgba(36, 36, 36, 0.5);
+  }
+}
+
+@-webkit-keyframes movie_list_color {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@keyframes movie_list_color {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@-webkit-keyframes movie_list_show {
+  from {
+    opacity: 1;
+    height: 100%;
+  }
+  99% {
+    opacity: 1;
+    height: 0%;
+  }
+  to {
+    opacity: 0;
+    height: 0%;
+  }
+}
+
+@keyframes movie_list_show {
+  from {
+    opacity: 1;
+    height: 100%;
+  }
+  99% {
+    opacity: 1;
+    height: 0%;
+  }
+  to {
+    opacity: 0;
+    height: 0%;
+  }
+}
 /*# sourceMappingURL=index.css.map */
