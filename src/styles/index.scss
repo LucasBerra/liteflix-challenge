@@ -93,7 +93,7 @@ body {
   padding: 2rem 5rem;
   background: linear-gradient(
     0deg,
-    rgba($color: #000, $alpha: 0.4) 70%,
+    rgba($color: #000, $alpha: 0.3) 70%,
     rgba($color: $fill-color, $alpha: 1) 100%
   );
   grid-template-columns: repeat(12, 1fr);
@@ -377,7 +377,7 @@ body {
     padding: 0;
     background: linear-gradient(
       /* CAMBIAR? */ 0deg,
-      rgba($color: #000, $alpha: 0.4) 90%,
+      rgba($color: #000, $alpha: 0.3) 90%,
       rgba($color: $fill-color, $alpha: 1) 100%
     );
     width: 100%;
