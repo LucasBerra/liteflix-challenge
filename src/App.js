@@ -25,7 +25,7 @@ const App = () => {
     setNotification,
   } = useContext(IndexContext);
 
-  // Se eligió una película específica
+  // Se elige una película aleatoria de la API
   const homepageMovie = mainMovieData.results[randomHomepageIndex];
 
   // Agregar película destacada a 'Mis Películas'
