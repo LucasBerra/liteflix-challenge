@@ -28,6 +28,12 @@ const App = () => {
     .filter(({ title }) => title === "Night Teeth")
     .pop();
 
+  //--------------------------------------------------------------------------------
+  //  Hay una branch de la página con lógica para películas destacadas aleatorias.
+  //
+  //  El deploy se encuentra en https://liteflix-challenge-alt.netlify.app/
+  //--------------------------------------------------------------------------------
+
   // Agregar película destacada a 'Mis Películas'
   const addHomepageMovieToList = () => {
     const movieObject = {
