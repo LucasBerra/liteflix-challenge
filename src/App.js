@@ -14,6 +14,8 @@ import { VscChromeClose } from "react-icons/vsc";
 const imageUrlOriginal = "https://image.tmdb.org/t/p/original";
 const imageUrlW500 = "https://image.tmdb.org/t/p/w500";
 
+const randomHomepageIndex = Math.floor(Math.random() * 20);
+
 const App = () => {
   const {
     mainMovieData,
@@ -24,9 +26,7 @@ const App = () => {
   } = useContext(IndexContext);
 
   // Se eligió una película específica
-  const homepageMovie = mainMovieData.results
-    .filter(({ title }) => title === "Night Teeth")
-    .pop();
+  const homepageMovie = mainMovieData.results[randomHomepageIndex];
 
   // Agregar película destacada a 'Mis Películas'
   const addHomepageMovieToList = () => {
