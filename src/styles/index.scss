@@ -286,7 +286,7 @@ body {
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   width: 300px;
   bottom: 10%;
   left: 50%;
@@ -413,23 +413,6 @@ body {
     text-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
     margin-top: 16px;
     animation: fade_in 0.5s ease-out forwards;
-  }
-
-  .notification {
-    z-index: 2;
-    width: 280px;
-    bottom: 10%;
-    left: 50%;
-    margin-left: -140px;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    line-height: 14px;
-    box-shadow: 0px 5px 10px rgba($color: #000, $alpha: 0.3);
-  }
-
-  .notification_close {
-    font-size: 20px;
   }
 }
 
