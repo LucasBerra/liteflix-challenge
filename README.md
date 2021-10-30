@@ -1,3 +1,5 @@
-# Getting Started with Create React App
+# Liteflix Challenge
 
-Proyecto creado para el Desafío Liteflix de litebox.ai
+Proyecto creado para el Desafío Liteflix de litebox.ai.
+
+¡Véanlo aquí! : https://liteflix-challenge.netlify.app/
